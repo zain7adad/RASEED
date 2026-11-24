@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -8,157 +8,203 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="فلوسي">
+<meta name="apple-mobile-web-app-title" content="RASEED">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>فلوسي</title>
+<title>RASEED | رصيد</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
 <style>
 :root{--bg:#070d1a;--s1:#0f1829;--s2:#16223a;--line:#22304d;--ink:#eef3fb;--mute:#8b9bb8;--em:#2ee6a6;--red:#ff6b7a;--gold:#f5c04a;color-scheme:dark}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,Tahoma,sans-serif}
-body{background:radial-gradient(900px 400px at 80% -10%,#12335a55,transparent),radial-gradient(700px 400px at 0% 0%,#2ee6a61a,transparent),var(--bg);min-height:100vh}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,system-ui,sans-serif}
+body{background:radial-gradient(900px 400px at 80% -10%,#12335a66,transparent),radial-gradient(700px 400px at 0% 0%,#2ee6a61f,transparent),var(--bg);min-height:100vh}
 main{max-width:560px;margin:auto;padding:calc(env(safe-area-inset-top,0px) + 16px) 16px 130px}
-h1{font-size:24px;font-weight:800;margin:0 0 4px}h2{font-size:14px;color:var(--mute);font-weight:600;margin:22px 0 10px}
-.card{background:linear-gradient(180deg,var(--s1),#0c1424);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px}
-.hero{background:linear-gradient(135deg,#0f5d4b,#0c2c4d 70%);border:1px solid #2ee6a644;box-shadow:0 10px 40px #2ee6a61a}
+h1{font-size:24px;font-weight:800;margin:0}h2{font-size:13px;color:var(--mute);font-weight:600;margin:22px 0 10px;letter-spacing:.3px}
+.card{background:linear-gradient(180deg,var(--s1),#0c1424);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px;animation:up .5s both}
+.card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}.card:nth-child(4){animation-delay:.15s}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #2ee6a688}50%{box-shadow:0 0 0 7px #2ee6a600}}
+@keyframes flU{0%{color:var(--em);transform:scale(1.04)}100%{transform:none}}@keyframes flD{0%{color:var(--red);transform:scale(1.04)}100%{transform:none}}
+.hero{background:linear-gradient(135deg,#0f5d4b,#0c2c4d 70%);border-color:#2ee6a644;box-shadow:0 10px 40px #2ee6a61f}
 .goldc{background:linear-gradient(135deg,#4a3510,#1a1608 80%);border-color:#f5c04a55}
-.big{font-size:34px;font-weight:800;line-height:1.15;letter-spacing:-.5px}.mid{font-size:22px;font-weight:800}
-.mute,.k{color:var(--mute);font-size:12px}.em{color:var(--em)}.red{color:var(--red)}.gd{color:var(--gold)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid .card{margin:0}
+.big{font-size:34px;font-weight:800;line-height:1.15}.mid{font-size:21px;font-weight:800}.k,.mute{color:var(--mute);font-size:12px}
+.em{color:var(--em)}.red{color:var(--red)}.gd{color:var(--gold)}.fu{animation:flU .8s}.fd{animation:flD .8s}
+.live{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--em);animation:pulse 1.6s infinite;margin-inline-end:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.grid .card{margin:0}
 input,select{width:100%;padding:13px;border-radius:14px;border:1px solid var(--line);background:var(--s2);color:var(--ink);font:inherit;margin-bottom:10px}
-button{font:inherit;font-weight:700;border:0;border-radius:14px;padding:13px;background:var(--em);color:#04281c;width:100%;cursor:pointer}
-button.alt{background:var(--s2);color:var(--ink);border:1px solid var(--line);margin-top:8px}
+button{font:inherit;font-weight:700;border:0;border-radius:14px;padding:13px;background:var(--em);color:#04281c;width:100%;cursor:pointer;transition:transform .12s}button:active{transform:scale(.97)}
+button.alt{background:var(--s2);color:var(--ink);border:1px solid var(--line);margin-top:8px}button.dng{background:#ff6b7a22;color:var(--red);border:1px solid #ff6b7a55}
 .row{display:flex;gap:8px}.row>*{flex:1}
 .li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.li:last-child{border:0}
 .ic{width:40px;height:40px;border-radius:12px;background:var(--s2);display:grid;place-items:center;font-size:18px;flex:none}
 .li .t{flex:1;min-width:0}.li b{display:block;font-size:14px}.x{background:none;color:var(--mute);width:auto;padding:4px 8px;font-size:18px}
-.chips{display:flex;gap:8px;margin-bottom:12px}.chips button{width:auto;padding:7px 16px;background:var(--s2);color:var(--mute);font-size:13px;border:1px solid var(--line)}.chips .on{background:var(--em);color:#04281c}
+.chips{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto}.chips button{width:auto;padding:7px 16px;background:var(--s2);color:var(--mute);font-size:13px;border:1px solid var(--line);white-space:nowrap}.chips .on{background:var(--em);color:#04281c}
 .chart{display:flex;gap:6px;height:120px;align-items:flex-end;direction:ltr;overflow-x:auto}
 .col{flex:1;min-width:22px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px}
-.bars{display:flex;gap:2px;align-items:flex-end;height:100px;width:100%}.bars i{flex:1;border-radius:4px 4px 0 0;min-height:2px}
+.bars{display:flex;gap:2px;align-items:flex-end;height:100px;width:100%}.bars i{flex:1;border-radius:4px 4px 0 0;min-height:2px;animation:gr .8s both;transform-origin:bottom}@keyframes gr{from{transform:scaleY(0)}}
 .col small{font-size:9px;color:var(--mute)}
-.cat{margin-bottom:10px}.cat .tr{height:7px;background:var(--s2);border-radius:9px;overflow:hidden;margin-top:5px}.cat .tr i{display:block;height:100%;background:linear-gradient(90deg,var(--em),#4aa8ff)}
-.badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:99px;background:#2ee6a622;color:var(--em)}.badge.w{background:#f5c04a22;color:var(--gold)}.badge.b{background:#ff6b7a22;color:var(--red)}
-nav{position:fixed;bottom:0;left:0;right:0;background:#0b1322ee;backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px));z-index:5}
-nav button{background:none;color:var(--mute);padding:4px;font-size:11px;border-radius:12px}nav button b{display:block;font-size:20px}nav button.on{color:var(--em)}
-#fab{position:fixed;bottom:calc(74px + env(safe-area-inset-bottom,0px));left:18px;width:58px;height:58px;border-radius:50%;font-size:30px;padding:0;z-index:6;box-shadow:0 8px 28px #2ee6a655}
+.cat{margin-bottom:10px}.tr{height:7px;background:var(--s2);border-radius:9px;overflow:hidden;margin-top:5px}.tr i{display:block;height:100%;background:linear-gradient(90deg,var(--em),#4aa8ff);animation:wd .9s both}@keyframes wd{from{width:0!important}}
+nav{position:fixed;bottom:0;left:0;right:0;background:#0b1322ee;backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;align-items:flex-end;padding:8px 6px calc(8px + env(safe-area-inset-bottom,0px));z-index:5}
+nav>*{flex:1}nav button{background:none;color:var(--mute);padding:4px;font-size:11px;border-radius:12px}nav button b{display:block;font-size:20px}nav button.on{color:var(--em)}
+nav .pl{display:flex;justify-content:center}nav .pl button{width:58px;height:58px;border-radius:50%;background:var(--em);color:#04281c;font-size:32px;line-height:1;padding:0;margin-top:-30px;box-shadow:0 8px 26px #2ee6a666;border:4px solid var(--bg)}
 #sheet{position:fixed;inset:0;background:#000a;z-index:20;display:none;align-items:flex-end}
-#sheet>div{background:var(--s1);width:100%;max-width:560px;margin:auto;border-radius:24px 24px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));border:1px solid var(--line)}
+#sheet>div{background:var(--s1);width:100%;max-width:560px;margin:auto;border-radius:24px 24px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));border:1px solid var(--line);animation:up .3s;max-height:90vh;overflow:auto}
 .seg{display:flex;background:var(--s2);border-radius:14px;padding:4px;margin-bottom:12px}.seg button{background:none;color:var(--mute);padding:10px}.seg .on{background:var(--em);color:#04281c}
-.auth{text-align:center;padding-top:8vh}.logo{font-size:56px}
-#toast{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translateX(-50%);background:var(--s2);border:1px solid var(--line);padding:10px 16px;border-radius:12px;z-index:30;display:none;font-size:13px}
-.empty{text-align:center;color:var(--mute);padding:22px;font-size:14px}
+.auth{text-align:center;padding-top:5vh}.logo{font-size:54px;animation:up .6s}.auth .card{text-align:start}
+.av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--em),#4aa8ff);display:grid;place-items:center;color:#04281c;font-weight:800;font-size:20px}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:6px;animation:up .4s}
+#toast{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translateX(-50%);background:var(--s2);border:1px solid var(--em);padding:10px 16px;border-radius:12px;z-index:30;display:none;font-size:13px;max-width:90%}
+.empty{text-align:center;color:var(--mute);padding:22px;font-size:14px}.ok{color:var(--em)}
 </style>
 </head>
 <body>
 <main id="app"></main>
-<button id="fab" onclick="openSheet()" style="display:none">+</button>
 <nav id="nav"></nav>
 <div id="sheet" onclick="if(event.target==this)closeSheet()"><div id="sh"></div></div>
 <div id="toast"></div>
 <script>
-/* ===== إعدادات Supabase: الصق بياناتك هنا (انظر خطوات الإعداد) ===== */
-const CFG={url:'https://rxuqtbskpxuvycknclyf.supabase.co',key:'sb_publishable_OESW9zo--_FlRIoAjz62qQ_23DRgpmP'};
-/* لو سيبتها فاضية التطبيق يشتغل بوضع تجريبي على الجهاز فقط */
-const LOCAL=!CFG.url,OZ=31.1035,RATE=3.75,$=i=>document.getElementById(i);
+const CFG=window.CFG||{},OZ=31.1035,RATE=3.75,$=i=>document.getElementById(i);
+const ls=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+let L=ls('lang','en'),cur=ls('cur','SAR'),P=ls('px',null),E=[],A=[],PF=null,user=null,sb=null,tab='home',flt='all',sheet='expense',last=null;
+const D={home:['Home','الرئيسية'],tx:['Activity','الحركات'],gold:['Gold','الذهب'],set:['Settings','الإعدادات'],
+gm:['Good morning','صباح الخير'],ga:['Good afternoon','نهارك سعيد'],ge:['Good evening','مساء الخير'],hello:['Hello','أهلًا'],
+wealth:['Total wealth','إجمالي الثروة'],cash:['Cash','السيولة'],gv:['Gold','ذهب'],inc:['Income','دخل'],exp:['Expense','مصروف'],
+mi:['Income this month','دخل الشهر'],me:['Spent this month','مصروف الشهر'],sr:['Savings rate','نسبة الادخار'],gp:['Gold performance','أداء الذهب'],
+ch:['Income vs expense','الدخل مقابل المصروف'],bc:['Spending by category','المصروفات حسب البند'],first:['Tap + to add your first entry','اضغط + لإضافة أول حركة'],
+all:['All','الكل'],none:['Nothing here yet','لا توجد حركات'],sar:['SAR','ر.س'],
+food:['Food','أكل وشرب'],transport:['Transport','مواصلات'],bills:['Bills','فواتير'],housing:['Housing','سكن'],health:['Health','صحة'],fun:['Fun','ترفيه'],shopping:['Shopping','تسوق'],other:['Other','أخرى'],
+salary:['Salary','راتب'],commission:['Commission','عمولة'],profit:['Profit','أرباح'],
+g24:['24K gram','جرام عيار 24'],oz:['Ounce','الأونصة'],upd:['Last update','آخر تحديث'],grams:['Total grams','إجمالي الجرامات'],avg:['Avg buy price','متوسط الشراء'],paid:['Paid','دفعت'],now:['Worth now','قيمتها الآن'],
+pl:['Profit / loss','الربح / الخسارة'],showUSD:['Show in USD $','عرض بالدولار $'],showSAR:['Show in SAR','عرض بالريال'],buys:['My purchases','مشترياتي'],
+al:['Price alerts','تنبيهات السعر'],newal:['+ New alert','+ تنبيه جديد'],noal:['No alerts yet','لا توجد تنبيهات'],above:['rises to','يصل أعلى من'],below:['drops to','ينزل إلى'],
+m_gram_sar:['Gram (SAR)','الجرام (ر.س)'],m_gram_usd:['Gram (USD)','الجرام ($)'],m_oz_sar:['Ounce (SAR)','الأونصة (ر.س)'],m_oz_usd:['Ounce (USD)','الأونصة ($)'],
+target:['Target price','السعر المطلوب'],alhit:['Gold alert','تنبيه الذهب'],
+date:['Date','التاريخ'],amount:['Amount (SAR)','المبلغ (ر.س)'],note:['Note (optional)','ملاحظة (اختياري)'],save:['Save','حفظ'],gram:['Grams','عدد الجرامات'],pgram:['Price per gram (SAR)','سعر الجرام (ر.س)'],usetoday:['Use today\'s price','استخدم سعر اليوم'],
+saved:['Saved ✓','تم الحفظ ✓'],fail:['Failed: ','تعذر: '],delq:['Delete this entry?','حذف هذا السجل؟'],
+login:['Log in','دخول'],signup:['Create account','إنشاء حساب'],email:['Email','البريد الإلكتروني'],pass:['Password (min 6)','كلمة السر (6 أحرف على الأقل)'],
+name:['Full name','الاسم'],age:['Age','السن'],uname:['Username','اسم المستخدم'],phone:['Phone number','رقم الهاتف'],tag:['Your money, your gold, one place','دخلك ومصروفك وذهبك في مكان واحد'],
+taken:['Username already taken','اسم المستخدم مستخدم بالفعل'],free:['Username available ✓','اسم المستخدم متاح ✓'],badu:['3-20 letters, numbers or _','من 3 إلى 20 حرف أو رقم أو _'],
+confirm:['Check your email to confirm, then log in','تحقق من بريدك للتأكيد ثم سجّل الدخول'],
+profile:['Profile','الملف الشخصي'],lang:['Language','اللغة'],pwd:['Change password','تغيير كلمة السر'],sendc:['Send code to my email','أرسل رمز إلى بريدي'],code:['Code from email','الرمز من البريد'],newp:['New password','كلمة السر الجديدة'],
+codesent:['Code sent to your email','تم إرسال الرمز لبريدك'],pdone:['Password changed ✓','تم تغيير كلمة السر ✓'],confirmbtn:['Confirm change','تأكيد التغيير'],
+logout:['Log out','تسجيل الخروج'],del:['Delete my account','حذف حسابي'],delw:['This permanently deletes your account and ALL your data. Continue?','سيتم حذف حسابك وكل بياناتك نهائيًا. متابعة؟'],delw2:['Last chance. Really delete?','آخر فرصة. حذف فعلًا؟'],
+notif:['Notifications','الإشعارات'],notifon:['Enable notifications','تفعيل الإشعارات'],notifok:['Notifications enabled ✓','الإشعارات مفعّلة ✓'],notifnote:['Alerts are checked every 10 seconds while the app is open.','التنبيهات تُفحص كل 10 ثواني والتطبيق مفتوح.'],
+csv:['Export my data (CSV)','تصدير بياناتي (CSV)'],ver:['Name & phone changes are saved to your account.','تُحفظ تعديلات الاسم والهاتف في حسابك.'],
+gbuy:['Gold purchase','شراء ذهب']};
+const t=k=>(D[k]||[k,k])[L=='ar'?1:0];
 const n=(x,d=0)=>Number(x||0).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const sum=(a,f)=>a.reduce((s,x)=>s+f(x),0),today=()=>new Date().toISOString().slice(0,10);
-const ls=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
-let E=[],tab='home',flt='all',user=null,sb=null,P=ls('px',null),prem=+ls('prem',0),cur=ls('cur','SAR'),sheet='expense';
-const EXC=['أكل وشرب','مواصلات','فواتير','سكن','صحة','ترفيه','تسوق','أخرى'],INC=['راتب','عمولة','أرباح','أخرى'];
-const ICO={'أكل وشرب':'🍽️','مواصلات':'🚗','فواتير':'💡','سكن':'🏠','صحة':'🩺','ترفيه':'🎬','تسوق':'🛍️','راتب':'💼','عمولة':'🤝','أرباح':'📈','أخرى':'✨'};
-const mon=k=>['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'][+k.slice(5)-1];
-function toast(t){const e=$('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',3000)}
+const sum=(a,f)=>a.reduce((s,x)=>s+f(x),0),today=()=>new Date().toISOString().slice(0,10),pad=x=>String(x).padStart(2,'0');
+const ICO={food:'🍽️',transport:'🚗',bills:'💡',housing:'🏠',health:'🩺',fun:'🎬',shopping:'🛍️',salary:'💼',commission:'🤝',profit:'📈',other:'✨',gold:'🪙'};
+const EXC=['food','transport','bills','housing','health','fun','shopping','other'],INC=['salary','commission','profit','other'];
+const mon=k=>new Date(k+'-01').toLocaleDateString(L=='ar'?'ar':'en',{month:'long',year:'numeric'});
+function toast(m){const e=$('toast');e.textContent=m;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',3200)}
+function setLang(l){L=l;localStorage.setItem('lang',JSON.stringify(l));document.documentElement.lang=l;document.documentElement.dir=l=='ar'?'rtl':'ltr';(user?render:authView)()}
+document.documentElement.lang=L;document.documentElement.dir=L=='ar'?'rtl':'ltr';
 
-/* ===== البيانات ===== */
+/* ===== data ===== */
 const sortE=()=>E.sort((a,b)=>b.date.localeCompare(a.date));
-const store={
-async load(){if(LOCAL){E=ls('E',[]);return}const{data,error}=await sb.from('entries').select('*').order('date',{ascending:false});if(error)throw error;E=data},
-async add(e){if(LOCAL){e.id=Date.now()+'';E.push(e);localStorage.setItem('E',JSON.stringify(E))}else{const{data,error}=await sb.from('entries').insert(e).select().single();if(error)throw error;E.push(data)}sortE()},
-async del(id){if(!LOCAL){const{error}=await sb.from('entries').delete().eq('id',id);if(error)throw error}E=E.filter(x=>x.id!=id);if(LOCAL)localStorage.setItem('E',JSON.stringify(E))}};
+async function load(){const[a,b,c]=await Promise.all([sb.from('entries').select('*').order('date',{ascending:false}),sb.from('alerts').select('*').order('created_at'),sb.from('profiles').select('*').eq('id',user.id).maybeSingle()]);
+if(a.error)throw a.error;E=a.data;A=b.data||[];PF=c.data}
+async function del(id){if(!confirm(t('delq')))return;const{error}=await sb.from('entries').delete().eq('id',id);if(error)return toast(t('fail')+error.message);E=E.filter(x=>x.id!=id);render()}
 
-/* ===== سعر الذهب (مصدرين + تحقق) ===== */
+/* ===== live price (every 10s) ===== */
 const J=async u=>{const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw 0;return r.json()};
-async function refreshPrice(){
-const r=await Promise.allSettled([J('https://api.gold-api.com/price/XAU').then(j=>+j.price),J('https://data-asg.goldprice.org/dbXRates/USD').then(j=>+j.items[0].xauPrice)]);
-const v=[['gold-api.com',r[0]],['goldprice.org',r[1]]].filter(x=>x[1].status=='fulfilled'&&x[1].value>0).map(x=>({s:x[0],p:x[1].value}));
-if(v.length){const avg=sum(v,x=>x.p)/v.length;P={oz:avg,src:v,dev:v.length>1?Math.abs(v[0].p-v[1].p)/avg*100:null,at:Date.now()};localStorage.setItem('px',JSON.stringify(P))}
-if(LOCAL||user)render()}
-const gram=()=>P?P.oz/OZ*RATE*(1+prem/100):0;
-const fg=x=>cur=='USD'?'$'+n(x/RATE,2):n(x)+' ر.س';
-function verify(){if(!P)return'<span class="badge b">لا يوجد سعر</span>';
-if(P.dev==null)return'<span class="badge w">مصدر واحد فقط ('+P.src[0].s+')</span>';
-return P.dev<0.5?'<span class="badge">✓ مؤكد من مصدرين (فرق '+P.dev.toFixed(2)+'%)</span>':'<span class="badge w">⚠ فرق '+P.dev.toFixed(2)+'% بين المصدرين</span>'}
+async function refreshPrice(){let oz=0;
+try{oz=+(await J('https://api.gold-api.com/price/XAU')).price}catch(e){}
+if(!(oz>0))try{oz=+(await J('https://data-asg.goldprice.org/dbXRates/USD')).items[0].xauPrice}catch(e){}
+if(oz>0){last=P?P.oz:null;P={oz,at:Date.now()};localStorage.setItem('px',JSON.stringify(P));checkAlerts();if(user&&(tab=='home'||tab=='gold'))render(true)}}
+const gram=()=>P?P.oz/OZ*RATE:0;
+const fg=x=>cur=='USD'?'$'+n(x/RATE,2):n(x)+' '+t('sar');
+const mval=m=>({gram_sar:gram(),gram_usd:gram()/RATE,oz_sar:gram()*OZ,oz_usd:gram()*OZ/RATE})[m];
+async function notify(title,body){toast('🔔 '+title+' — '+body);try{navigator.vibrate&&navigator.vibrate([200,100,200]);if(window.Notification&&Notification.permission=='granted'){const r=await navigator.serviceWorker.ready;r.showNotification(title,{body,icon:'icon-192.png'})}}catch(e){}}
+async function checkAlerts(){if(!user||!P)return;for(const a of A.filter(x=>x.active)){const v=mval(a.metric);if(a.dir=='above'?v>=+a.target:v<=+a.target){a.active=false;notify('🪙 '+t('alhit'),t('m_'+a.metric)+' '+t(a.dir)+' '+n(a.target,2)+' ('+n(v,2)+')');await sb.from('alerts').update({active:false}).eq('id',a.id)}}}
 
-/* ===== حسابات ===== */
-function stats(){const k=t=>E.filter(x=>x.kind==t),inc=sum(k('income'),x=>+x.amount),exp=sum(k('expense'),x=>+x.amount),gl=k('gold'),g=sum(gl,x=>+x.grams),cost=sum(gl,x=>x.grams*x.price),val=g*gram();
-return{inc,exp,cash:inc-exp,g,cost,val,pl:val-cost,pct:cost&&P?(val-cost)/cost*100:0,avg:g?cost/g:0}}
-const sg=x=>x>=0?'em':'red',pc=x=>(x>=0?'+':'')+x.toFixed(1)+'%';
+/* ===== stats ===== */
+function stats(){const k=x=>E.filter(e=>e.kind==x),inc=sum(k('income'),x=>+x.amount),exp=sum(k('expense'),x=>+x.amount),gl=k('gold'),g=sum(gl,x=>+x.grams),cost=sum(gl,x=>x.grams*x.price),val=g*gram();
+return{inc,exp,cash:inc-exp-cost,g,cost,val,pl:val-cost,pct:cost&&P?(val-cost)/cost*100:0,avg:g?cost/g:0}}
+const sg=x=>x>=0?'em':'red',pc=x=>(x>=0?'+':'')+x.toFixed(1)+'%',cu=(x,d=0,p='')=>`<span data-cu="${x}" data-d="${d}" data-p="${p}">${p}${n(x,d)}</span>`;
+function anim(){document.querySelectorAll('[data-cu]').forEach(el=>{const to=+el.dataset.cu,d=+el.dataset.d,p=el.dataset.p,s=performance.now();(function f(now){const k=Math.min(1,(now-s)/900),e=1-Math.pow(1-k,3);el.textContent=p+n(to*e,d);if(k<1)requestAnimationFrame(f)})(s)})}
 
-/* ===== العرض ===== */
-function render(){
-const T=[['home','🏠','الرئيسية'],['list','🧾','الحركات'],['gold','🪙','الذهب'],['me','⚙️','حسابي']];
-$('nav').innerHTML=T.map(t=>`<button class="${tab==t[0]?'on':''}" style="flex:1" onclick="tab='${t[0]}';render();scrollTo(0,0)"><b>${t[1]}</b>${t[2]}</button>`).join('');
-$('fab').style.display='block';$('app').innerHTML={home,list,gold,me}[tab]()}
+/* ===== views ===== */
+function render(tick){const T=[['home','🏠'],['tx','🧾'],null,['gold','🪙'],['set','⚙️']];
+$('nav').innerHTML=T.map(x=>x?`<button class="${tab==x[0]?'on':''}" onclick="tab='${x[0]}';render();scrollTo(0,0)"><b>${x[1]}</b>${t(x[0])}</button>`:'<div class="pl"><button onclick="openSheet()">+</button></div>').join('');
+$('app').innerHTML={home,tx,gold,set}[tab]();if(!tick)anim();if(tick&&last!=null&&P){const e=document.querySelector('.px');if(e)e.classList.add(P.oz>=last?'fu':'fd')}}
+function home(){const s=stats(),mk=today().slice(0,7),f=(q,m)=>sum(E.filter(x=>x.kind==q&&x.date.startsWith(m)),x=>+x.amount),mi=f('income',mk),me=f('expense',mk),h=new Date().getHours(),
+gr=h<12?t('gm'):h<18?t('ga'):t('ge'),nm=(PF?.name||PF?.username||'').split(' ')[0];
+const ks=[...new Set(E.filter(x=>x.kind!='gold').map(x=>x.date.slice(0,7)))].sort().slice(-12),Dt=ks.map(k=>({k,i:f('income',k),e:f('expense',k)})),mx=Math.max(1,...Dt.flatMap(d=>[d.i,d.e])),
+cats={};E.filter(x=>x.kind=='expense'&&x.date.startsWith(mk)).forEach(x=>cats[x.category]=(cats[x.category]||0)+ +x.amount);const cm=Math.max(1,...Object.values(cats));
+return`<div class="top"><div class="av">${esc((nm||'?')[0].toUpperCase())}</div><div><div class="k">${gr} 👋</div><h1>${t('hello')}, ${esc(nm)}</h1></div></div><div class="k" style="margin:2px 0 14px">${mon(mk)}</div>
+<div class="card hero"><div class="k" style="color:#bfeede">${t('wealth')}</div><div class="big">${cu(s.cash+s.val)} ${t('sar')}</div><div class="k" style="color:#bfeede;margin-top:6px">${t('cash')} ${n(s.cash)} · ${t('gv')} ${n(s.val)}</div></div>
+<div class="grid"><div class="card"><div class="k">${t('mi')}</div><div class="mid em">${cu(mi)}</div></div><div class="card"><div class="k">${t('me')}</div><div class="mid red">${cu(me)}</div></div>
+<div class="card"><div class="k">${t('sr')}</div><div class="mid">${cu(mi?Math.round((mi-me)/mi*100):0,0)}%</div></div><div class="card" onclick="tab='gold';render()"><div class="k">${t('gp')}</div><div class="mid ${sg(s.pl)}">${s.cost?pc(s.pct):'—'}</div></div></div>
+<h2>${t('ch')}</h2><div class="card">${Dt.length?`<div class="chart">${Dt.map(d=>`<div class="col"><div class="bars"><i style="height:${d.i/mx*100}%;background:var(--em)"></i><i style="height:${d.e/mx*100}%;background:var(--red)"></i></div><small>${d.k.slice(2)}</small></div>`).join('')}</div>`:`<div class="empty">${t('first')}</div>`}</div>
+${Object.keys(cats).length?`<h2>${t('bc')}</h2><div class="card">${Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([c,v])=>`<div class="cat"><div class="row" style="justify-content:space-between"><span>${ICO[c]||'✨'} ${esc(t(c))}</span><b>${n(v)}</b></div><div class="tr"><i style="width:${v/cm*100}%"></i></div></div>`).join('')}</div>`:''}`}
+function tx(){const Lx=E.filter(x=>flt=='all'||x.kind==flt).slice(0,150);
+return`<h1>${t('tx')}</h1><h2></h2><div class="chips">${[['all',t('all')],['income',t('inc')],['expense',t('exp')],['gold',t('gv')]].map(c=>`<button class="${flt==c[0]?'on':''}" onclick="flt='${c[0]}';render()">${c[1]}</button>`).join('')}</div>
+<div class="card">${Lx.length?Lx.map(x=>{const g=x.kind=='gold';return`<div class="li"><div class="ic">${g?'🪙':ICO[x.category]||'✨'}</div><div class="t"><b>${g?t('gbuy')+' · '+n(x.grams,2)+' g × '+n(x.price,2):esc(t(x.category||''))}${x.note?' · '+esc(x.note):''}</b><span class="k">${x.date}</span></div><b class="${x.kind=='income'?'em':g?'gd':'red'}">${x.kind=='income'?'+':'−'}${n(x.amount)}</b><button class="x" onclick="del('${x.id}')">×</button></div>`}).join(''):`<div class="empty">${t('none')}</div>`}</div>`}
+function gold(){const s=stats(),u=cur=='USD';
+return`<h1>${t('gold')}</h1><h2></h2><div class="card goldc"><div class="k">${t('g24')}</div><div class="big gd px">${P?n(gram(),2)+' '+t('sar'):'—'}</div>
+${P?`<div style="font-weight:600;margin-top:2px">$${n(gram()/RATE,2)} / g</div><div class="k" style="margin-top:10px">${t('oz')}: ${n(gram()*OZ,2)} ${t('sar')} · $${n(gram()*OZ/RATE,2)}</div>`:''}
+<div class="k" style="margin-top:12px"><span class="live"></span>${t('upd')}: ${P?new Date(P.at).toLocaleTimeString('en-GB'):'—'}</div></div>
+<div class="grid"><div class="card"><div class="k">${t('grams')}</div><div class="mid">${n(s.g,2)}</div></div><div class="card"><div class="k">${t('avg')}</div><div class="mid">${fg(s.avg)}</div></div>
+<div class="card"><div class="k">${t('paid')}</div><div class="mid">${fg(s.cost)}</div></div><div class="card"><div class="k">${t('now')}</div><div class="mid gd">${fg(s.val)}</div></div></div>
+<div class="card"><div class="k">${t('pl')}</div><div class="big ${sg(s.pl)}">${s.pl>=0?'+':''}${fg(s.pl)}</div><div class="${sg(s.pl)}" style="font-weight:700">${s.cost?pc(s.pct):''}</div><button class="alt" onclick="cur='${u?'SAR':'USD'}';localStorage.setItem('cur',JSON.stringify(cur));render()">${u?t('showSAR'):t('showUSD')}</button></div>
+<h2>🔔 ${t('al')}</h2><div class="card">${A.length?A.map(a=>`<div class="li"><div class="ic">${a.active?'🔔':'✅'}</div><div class="t"><b>${t('m_'+a.metric)} ${t(a.dir)} ${n(a.target,2)}</b></div><button class="x" onclick="delAlert('${a.id}')">×</button></div>`).join(''):`<div class="empty">${t('noal')}</div>`}<button class="alt" onclick="openSheet('alert')">${t('newal')}</button></div>
+<h2>${t('buys')}</h2><div class="card">${E.filter(x=>x.kind=='gold').map(x=>{const c=x.grams*x.price,p=P?x.grams*gram()-c:0;return`<div class="li"><div class="ic">🪙</div><div class="t"><b>${n(x.grams,2)} g × ${fg(x.price)}</b><span class="k">${x.date} · ${t('paid')} ${fg(c)}</span></div><div style="text-align:end"><b class="${sg(p)}">${P?pc(p/c*100):''}</b><div class="k">${P?(p>=0?'+':'')+fg(p):''}</div></div><button class="x" onclick="del('${x.id}')">×</button></div>`}).join('')||`<div class="empty">${t('first')}</div>`}</div>`}
+function set(){const nok=window.Notification&&Notification.permission=='granted';
+return`<h1>${t('set')}</h1><h2>${t('profile')}</h2><div class="card"><div class="k" style="margin-bottom:8px">${esc(user.email)}</div>
+<input id="pn" placeholder="${t('name')}" value="${esc(PF?.name)}"><input id="pa" type="number" placeholder="${t('age')}" value="${PF?.age??''}"><input id="pu" placeholder="${t('uname')}" value="${esc(PF?.username)}"><input id="pp" type="tel" placeholder="${t('phone')}" value="${esc(PF?.phone)}">
+<button onclick="saveProfile()">${t('save')}</button></div>
+<h2>${t('lang')}</h2><div class="card"><div class="seg" style="margin:0"><button class="${L=='en'?'on':''}" onclick="setLang('en')">English</button><button class="${L=='ar'?'on':''}" onclick="setLang('ar')">العربية</button></div></div>
+<h2>${t('pwd')}</h2><div class="card"><div id="pw1"><button class="alt" style="margin:0" onclick="sendCode()">${t('sendc')}</button></div><div id="pw2" style="display:none"><input id="pc" inputmode="numeric" placeholder="${t('code')}"><input id="pnw" type="password" placeholder="${t('newp')}"><button onclick="changePw()">${t('confirmbtn')}</button></div></div>
+<h2>${t('notif')}</h2><div class="card">${nok?`<div class="ok">${t('notifok')}</div>`:`<button class="alt" style="margin:0" onclick="askNotif()">${t('notifon')}</button>`}<div class="k" style="margin-top:8px">${t('notifnote')}</div></div>
+<button class="alt" onclick="exportCsv()">${t('csv')}</button><button class="alt" onclick="logout()">${t('logout')}</button><button class="dng" style="margin-top:8px" onclick="delAccount()">${t('del')}</button>`}
 
-function home(){const s=stats(),mk=today().slice(0,7),f=(t,m)=>sum(E.filter(x=>x.kind==t&&x.date.startsWith(m)),x=>+x.amount),mi=f('income',mk),me_=f('expense',mk);
-const ks=[...new Set(E.filter(x=>x.kind!='gold').map(x=>x.date.slice(0,7)))].sort().slice(-12),D=ks.map(k=>({k,i:f('income',k),e:f('expense',k)})),mx=Math.max(1,...D.flatMap(d=>[d.i,d.e]));
-const cats={};E.filter(x=>x.kind=='expense'&&x.date.startsWith(mk)).forEach(x=>cats[x.category]=(cats[x.category]||0)+ +x.amount);const cm=Math.max(1,...Object.values(cats));
-return`<h1>أهلًا 👋</h1><div class="mute">${mon(mk)} ${mk.slice(0,4)}</div><h2></h2>
-<div class="card hero"><div class="k" style="color:#bfeede">إجمالي الثروة</div><div class="big">${n(s.cash+s.val)} ر.س</div><div class="k" style="color:#bfeede;margin-top:6px">سيولة ${n(s.cash)} · ذهب ${n(s.val)}</div></div>
-<div class="grid"><div class="card"><div class="k">دخل الشهر</div><div class="mid em">${n(mi)}</div></div><div class="card"><div class="k">مصروف الشهر</div><div class="mid red">${n(me_)}</div></div>
-<div class="card"><div class="k">نسبة الادخار</div><div class="mid">${mi?Math.round((mi-me_)/mi*100):0}%</div></div><div class="card" onclick="tab='gold';render()"><div class="k">أداء الذهب</div><div class="mid ${sg(s.pl)}">${s.cost?pc(s.pct):'—'}</div></div></div>
-<h2>الدخل مقابل المصروف</h2><div class="card">${D.length?`<div class="chart">${D.map(d=>`<div class="col"><div class="bars"><i style="height:${d.i/mx*100}%;background:var(--em)"></i><i style="height:${d.e/mx*100}%;background:var(--red)"></i></div><small>${d.k.slice(2)}</small></div>`).join('')}</div>`:'<div class="empty">سجّل أول حركة بزر +</div>'}</div>
-${Object.keys(cats).length?`<h2>مصروفات الشهر حسب البند</h2><div class="card">${Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([c,v])=>`<div class="cat"><div class="row" style="justify-content:space-between"><span>${ICO[c]||'✨'} ${esc(c)}</span><b>${n(v)}</b></div><div class="tr"><i style="width:${v/cm*100}%"></i></div></div>`).join('')}</div>`:''}`}
+/* ===== settings actions ===== */
+async function saveProfile(){const u=$('pu').value.trim().toLowerCase();if(!/^[a-z0-9_]{3,20}$/.test(u))return toast(t('badu'));
+const r={name:$('pn').value.trim(),age:+$('pa').value||null,username:u,phone:$('pp').value.trim()||null},{error}=await sb.from('profiles').update(r).eq('id',user.id);
+if(error)return toast(error.code=='23505'?t('taken'):t('fail')+error.message);PF={...PF,...r};toast(t('saved'));render()}
+async function sendCode(){const{error}=await sb.auth.reauthenticate();if(error)return toast(t('fail')+error.message);$('pw1').style.display='none';$('pw2').style.display='block';toast(t('codesent'))}
+async function changePw(){const{error}=await sb.auth.updateUser({password:$('pnw').value,nonce:$('pc').value.trim()});if(error)return toast(t('fail')+error.message);toast(t('pdone'));render()}
+async function askNotif(){if(!window.Notification)return toast('Not supported');await Notification.requestPermission();render()}
+function exportCsv(){const r=['date,kind,category,amount,grams,price,note',...E.map(x=>[x.date,x.kind,x.category||'',x.amount,x.grams||'',x.price||'','"'+(x.note||'').replace(/"/g,'""')+'"'].join(','))],a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+r.join('\n')],{type:'text/csv'}));a.download='raseed.csv';a.click()}
+async function delAccount(){if(!confirm(t('delw'))||!confirm(t('delw2')))return;const{error}=await sb.rpc('delete_my_account');if(error)return toast(t('fail')+error.message);await sb.auth.signOut();user=null;E=[];A=[];authView()}
+async function delAlert(id){await sb.from('alerts').delete().eq('id',id);A=A.filter(x=>x.id!=id);render()}
 
-function list(){const L=E.filter(x=>x.kind!='gold'&&(flt=='all'||x.kind==flt)).slice(0,100);
-return`<h1>الحركات</h1><h2></h2><div class="chips">${[['all','الكل'],['income','دخل'],['expense','مصروف']].map(c=>`<button class="${flt==c[0]?'on':''}" onclick="flt='${c[0]}';render()">${c[1]}</button>`).join('')}</div>
-<div class="card">${L.length?L.map(x=>`<div class="li"><div class="ic">${ICO[x.category]||'✨'}</div><div class="t"><b>${esc(x.category||'')}${x.note?' · '+esc(x.note):''}</b><span class="k">${x.date}</span></div><b class="${x.kind=='income'?'em':'red'}">${x.kind=='income'?'+':'−'}${n(x.amount)}</b><button class="x" onclick="del('${x.id}')">×</button></div>`).join(''):'<div class="empty">لا توجد حركات</div>'}</div>`}
-
-function gold(){const s=stats(),gl=E.filter(x=>x.kind=='gold'),u=cur=='USD';
-return`<h1>الذهب</h1><h2></h2><div class="card goldc"><div class="k">جرام عيار 24</div><div class="big gd">${P?n(gram(),2)+' ر.س':'—'}</div>
-${P?`<div style="font-weight:600;margin-top:2px">$${n(gram()/RATE,2)} للجرام</div><div class="k" style="margin-top:10px">الأونصة: ${n(gram()*OZ,2)} ر.س · $${n(gram()*OZ/RATE,2)}</div>`:''}
-<div style="margin-top:12px">${verify()}</div>
-<div class="k" style="margin-top:8px;line-height:1.8">${P?P.src.map(x=>x.s+': $'+n(x.p,2)).join(' · ')+'<br>آخر تحديث '+new Date(P.at).toLocaleTimeString('ar-EG')+' · سعر عالمي فوري (Spot)، وقد يختلف قليلًا عن سعر المحلات — قارنه بـ kitco.com':'اضغط تحديث'}</div>
-<button class="alt" onclick="refreshPrice()">🔄 تحديث السعر</button></div>
-<div class="grid"><div class="card"><div class="k">إجمالي الجرامات</div><div class="mid">${n(s.g,2)}</div></div><div class="card"><div class="k">متوسط الشراء</div><div class="mid">${fg(s.avg)}</div></div>
-<div class="card"><div class="k">دفعت</div><div class="mid">${fg(s.cost)}</div></div><div class="card"><div class="k">قيمتها الآن</div><div class="mid gd">${fg(s.val)}</div></div></div>
-<div class="card" style="margin-top:12px"><div class="k">الربح / الخسارة</div><div class="big ${sg(s.pl)}">${s.pl>=0?'+':''}${fg(s.pl)}</div><div class="${sg(s.pl)}" style="font-weight:700">${s.cost?pc(s.pct):''}</div>
-<button class="alt" onclick="setCur()">${u?'عرض بالريال':'عرض بالدولار $'}</button></div>
-<h2>مشترياتي</h2><div class="card">${gl.length?gl.map(x=>{const c=x.grams*x.price,p=P?x.grams*gram()-c:0;return`<div class="li"><div class="ic">🪙</div><div class="t"><b>${n(x.grams,2)} جم × ${fg(x.price)}</b><span class="k">${x.date} · دفعت ${fg(c)}</span></div><div style="text-align:left"><b class="${sg(p)}">${P?pc(p/c*100):''}</b><div class="k">${P?(p>=0?'+':'')+fg(p):''}</div></div><button class="x" onclick="del('${x.id}')">×</button></div>`}).join(''):'<div class="empty">سجّل أول عملية شراء بزر +</div>'}</div>`}
-
-function me(){return`<h1>حسابي</h1><h2></h2><div class="card"><div class="k">الحساب</div><div style="margin:4px 0 12px">${LOCAL?'وضع تجريبي (البيانات على هذا الجهاز فقط)':esc(user?.email)}</div>${LOCAL?'<div class="k" style="line-height:1.8">لتفعيل الحسابات وحفظ البيانات سحابيًا اتبع خطوات الإعداد في الدليل.</div>':'<button class="alt" onclick="logout()">تسجيل الخروج</button>'}</div>
-<div class="card"><div class="k">علاوة السوق المحلي على السعر العالمي (%)</div><input id="pr" type="number" inputmode="decimal" value="${prem}" step="0.1"><button class="alt" onclick="prem=+$('pr').value||0;localStorage.setItem('prem',prem);render();toast('تم الحفظ')">حفظ</button><div class="k" style="margin-top:8px;line-height:1.7">اختياري: لو سعر البيع عند محلك أعلى أو أقل من السعر العالمي، ضع الفرق التقريبي لتقترب القيمة من الواقع.</div></div>`}
-
-/* ===== نافذة الإضافة ===== */
-function openSheet(k){sheet=k||sheet;const g=sheet=='gold';
-$('sh').innerHTML=`<div class="seg">${[['expense','مصروف'],['income','دخل'],['gold','ذهب']].map(c=>`<button class="${sheet==c[0]?'on':''}" onclick="openSheet('${c[0]}')">${c[1]}</button>`).join('')}</div>
-<input type="date" id="sd" value="${today()}">
-${g?`<div class="row"><input id="sg" type="number" inputmode="decimal" placeholder="عدد الجرامات"><input id="sp" type="number" inputmode="decimal" placeholder="سعر الجرام (ر.س)" ${P?`value=""`:''}></div>${P?`<button class="alt" style="margin:-2px 0 10px" onclick="$('sp').value=gram().toFixed(2)">استخدم سعر اليوم ${n(gram(),2)}</button>`:''}`:`<input id="sa" type="number" inputmode="decimal" placeholder="المبلغ بالريال"><select id="sc">${(sheet=='income'?INC:EXC).map(c=>`<option>${c}</option>`).join('')}</select>`}
-<input id="sn" placeholder="ملاحظة (اختياري)"><button onclick="saveE()">حفظ</button>`;$('sheet').style.display='flex'}
-function setCur(){cur=cur=='USD'?'SAR':'USD';localStorage.setItem('cur',JSON.stringify(cur));render()}
+/* ===== add sheet ===== */
+function openSheet(k){sheet=k||(sheet=='alert'?'expense':sheet);const g=sheet=='gold',al=sheet=='alert';
+$('sh').innerHTML=`<div class="seg">${[['expense',t('exp')],['income',t('inc')],['gold',t('gv')],['alert','🔔']].map(c=>`<button class="${sheet==c[0]?'on':''}" onclick="openSheet('${c[0]}')">${c[1]}</button>`).join('')}</div>`+
+(al?`<select id="am">${['gram_sar','gram_usd','oz_sar','oz_usd'].map(m=>`<option value="${m}">${t('m_'+m)}</option>`).join('')}</select><select id="ad"><option value="above">${t('above')}</option><option value="below">${t('below')}</option></select><input id="at" type="number" inputmode="decimal" placeholder="${t('target')}">${P?`<div class="k" style="margin:-4px 0 10px">${t('gram_sar'===0?'':'m_gram_sar')}: ${n(gram(),2)} · ${t('m_oz_usd')}: ${n(gram()*OZ/RATE,2)}</div>`:''}<button onclick="saveAlert()">${t('save')}</button>`:
+`<input type="date" id="sd" value="${today()}">`+(g?`<div class="row"><input id="sg" type="number" inputmode="decimal" placeholder="${t('gram')}"><input id="sp" type="number" inputmode="decimal" placeholder="${t('pgram')}"></div>${P?`<button class="alt" style="margin:-2px 0 10px" onclick="$('sp').value=gram().toFixed(2)">${t('usetoday')} ${n(gram(),2)}</button>`:''}`:
+`<input id="sa" type="number" inputmode="decimal" placeholder="${t('amount')}"><select id="sc">${(sheet=='income'?INC:EXC).map(c=>`<option value="${c}">${t(c)}</option>`).join('')}</select>`)+`<input id="sn" placeholder="${t('note')}"><button onclick="saveE()">${t('save')}</button>`);$('sheet').style.display='flex'}
 function closeSheet(){$('sheet').style.display='none'}
 async function saveE(){const d=$('sd').value,e={kind:sheet,date:d,note:$('sn').value||null};if(!d)return;
 if(sheet=='gold'){e.grams=+$('sg').value;e.price=+$('sp').value;if(!e.grams||!e.price)return;e.amount=e.grams*e.price}else{e.amount=+$('sa').value;if(!e.amount)return;e.category=$('sc').value}
-try{await store.add(e);closeSheet();render();toast('تم الحفظ ✓')}catch(x){toast('تعذر الحفظ: '+(x.message||x))}}
-async function del(id){if(!confirm('حذف هذا السجل؟'))return;try{await store.del(id);render()}catch(x){toast('تعذر الحذف')}}
+const{data,error}=await sb.from('entries').insert(e).select().single();if(error)return toast(t('fail')+error.message);E.push(data);sortE();closeSheet();render();toast(t('saved'))}
+async function saveAlert(){const v=+$('at').value;if(!v)return;if(window.Notification&&Notification.permission=='default')await Notification.requestPermission();
+const{data,error}=await sb.from('alerts').insert({metric:$('am').value,dir:$('ad').value,target:v}).select().single();if(error)return toast(t('fail')+error.message);A.push(data);closeSheet();render();toast(t('saved'))}
 
-/* ===== الدخول ===== */
-function authView(){$('nav').innerHTML='';$('fab').style.display='none';$('app').innerHTML=`<div class="auth"><div class="logo">💰</div><h1>فلوسي</h1><p class="mute">دخلك ومصروفك واستثمارك في الذهب في مكان واحد</p><div class="card" style="text-align:right"><input id="em" type="email" placeholder="البريد الإلكتروني" autocomplete="email"><input id="pw" type="password" placeholder="كلمة السر (6 أحرف على الأقل)" autocomplete="current-password"><button onclick="auth('in')">دخول</button><button class="alt" onclick="auth('up')">إنشاء حساب جديد</button><div id="am" class="k" style="margin-top:10px"></div></div></div>`}
-async function auth(m){const email=$('em').value.trim(),password=$('pw').value;$('am').textContent='...';
-const r=m=='up'?await sb.auth.signUp({email,password}):await sb.auth.signInWithPassword({email,password});
-if(r.error){$('am').textContent=r.error.message;return}
-if(!r.data.session){$('am').textContent='أُرسل إليك إيميل تأكيد. أكّده ثم سجّل الدخول.';return}
-user=r.data.session.user;boot()}
-async function logout(){await sb.auth.signOut();user=null;E=[];authView()}
-async function boot(){try{await store.load()}catch(x){toast('تعذر تحميل البيانات')}render();refreshPrice()}
-(async()=>{
-try{if(!LOCAL){sb=supabase.createClient(CFG.url,CFG.key);user=(await sb.auth.getSession()).data.session?.user||null}}catch(e){toast('تعذر الاتصال بالخادم')}
-if(LOCAL||user)boot();else authView();
-setInterval(()=>{if(LOCAL||user)refreshPrice()},300000);
-document.addEventListener('visibilitychange',()=>{if(!document.hidden&&(LOCAL||user))refreshPrice()});
+/* ===== auth ===== */
+let mode='in';
+function authView(){$('nav').innerHTML='';const su=mode=='up';$('app').innerHTML=`<div class="auth"><div class="logo">💰</div><h1>RASEED · رصيد</h1><p class="mute">${t('tag')}</p>
+<div class="card"><div class="seg"><button class="${!su?'on':''}" onclick="mode='in';authView()">${t('login')}</button><button class="${su?'on':''}" onclick="mode='up';authView()">${t('signup')}</button></div>
+${su?`<input id="rn" placeholder="${t('name')}"><input id="ra" type="number" inputmode="numeric" placeholder="${t('age')}"><input id="ru" placeholder="${t('uname')}" autocapitalize="none" oninput="chkU()"><div id="um" class="k" style="margin:-6px 0 10px"></div><input id="rp" type="tel" placeholder="${t('phone')}">`:''}
+<input id="em" type="email" placeholder="${t('email')}" autocomplete="email"><input id="pw" type="password" placeholder="${t('pass')}"><button onclick="auth()">${su?t('signup'):t('login')}</button>
+<div id="am" class="k" style="margin-top:10px"></div><div class="seg" style="margin:12px 0 0"><button class="${L=='en'?'on':''}" onclick="setLang('en')">English</button><button class="${L=='ar'?'on':''}" onclick="setLang('ar')">العربية</button></div></div></div>`}
+let ut;function chkU(){clearTimeout(ut);const u=$('ru').value.trim().toLowerCase(),m=$('um');if(!u){m.textContent='';return}if(!/^[a-z0-9_]{3,20}$/.test(u)){m.className='k red';m.textContent=t('badu');return}
+ut=setTimeout(async()=>{const{data}=await sb.rpc('username_free',{u});m.className='k '+(data?'ok':'red');m.textContent=data?t('free'):t('taken')},350)}
+async function auth(){const email=$('em').value.trim(),password=$('pw').value,m=$('am');m.className='k';m.textContent='...';let r;
+if(mode=='up'){const u=$('ru').value.trim().toLowerCase(),nm=$('rn').value.trim(),age=+$('ra').value;if(!nm||!age||!/^[a-z0-9_]{3,20}$/.test(u)){m.className='k red';m.textContent=t('badu');return}
+const f=await sb.rpc('username_free',{u});if(!f.data){m.className='k red';m.textContent=t('taken');return}
+r=await sb.auth.signUp({email,password,options:{data:{username:u,name:nm,age,phone:$('rp').value.trim()}}})}else r=await sb.auth.signInWithPassword({email,password});
+if(r.error){m.className='k red';m.textContent=r.error.message;return}if(!r.data.session){m.textContent=t('confirm');return}user=r.data.session.user;boot()}
+async function logout(){await sb.auth.signOut();user=null;E=[];A=[];authView()}
+async function boot(){try{await load()}catch(x){toast(t('fail')+(x.message||x))}render();refreshPrice()}
+(async()=>{try{sb=supabase.createClient(CFG.url,CFG.key);user=(await sb.auth.getSession()).data.session?.user||null}catch(e){}
+if(user)boot();else authView();
+setInterval(()=>{if(!document.hidden)refreshPrice()},10000);refreshPrice();
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})})();
 </script>
 </body>

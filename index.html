@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070d1a">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="فلوسي">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>فلوسي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<style>
+:root{--bg:#070d1a;--s1:#0f1829;--s2:#16223a;--line:#22304d;--ink:#eef3fb;--mute:#8b9bb8;--em:#2ee6a6;--red:#ff6b7a;--gold:#f5c04a;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,Tahoma,sans-serif}
+body{background:radial-gradient(900px 400px at 80% -10%,#12335a55,transparent),radial-gradient(700px 400px at 0% 0%,#2ee6a61a,transparent),var(--bg);min-height:100vh}
+main{max-width:560px;margin:auto;padding:calc(env(safe-area-inset-top,0px) + 16px) 16px 130px}
+h1{font-size:24px;font-weight:800;margin:0 0 4px}h2{font-size:14px;color:var(--mute);font-weight:600;margin:22px 0 10px}
+.card{background:linear-gradient(180deg,var(--s1),#0c1424);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px}
+.hero{background:linear-gradient(135deg,#0f5d4b,#0c2c4d 70%);border:1px solid #2ee6a644;box-shadow:0 10px 40px #2ee6a61a}
+.goldc{background:linear-gradient(135deg,#4a3510,#1a1608 80%);border-color:#f5c04a55}
+.big{font-size:34px;font-weight:800;line-height:1.15;letter-spacing:-.5px}.mid{font-size:22px;font-weight:800}
+.mute,.k{color:var(--mute);font-size:12px}.em{color:var(--em)}.red{color:var(--red)}.gd{color:var(--gold)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid .card{margin:0}
+input,select{width:100%;padding:13px;border-radius:14px;border:1px solid var(--line);background:var(--s2);color:var(--ink);font:inherit;margin-bottom:10px}
+button{font:inherit;font-weight:700;border:0;border-radius:14px;padding:13px;background:var(--em);color:#04281c;width:100%;cursor:pointer}
+button.alt{background:var(--s2);color:var(--ink);border:1px solid var(--line);margin-top:8px}
+.row{display:flex;gap:8px}.row>*{flex:1}
+.li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.li:last-child{border:0}
+.ic{width:40px;height:40px;border-radius:12px;background:var(--s2);display:grid;place-items:center;font-size:18px;flex:none}
+.li .t{flex:1;min-width:0}.li b{display:block;font-size:14px}.x{background:none;color:var(--mute);width:auto;padding:4px 8px;font-size:18px}
+.chips{display:flex;gap:8px;margin-bottom:12px}.chips button{width:auto;padding:7px 16px;background:var(--s2);color:var(--mute);font-size:13px;border:1px solid var(--line)}.chips .on{background:var(--em);color:#04281c}
+.chart{display:flex;gap:6px;height:120px;align-items:flex-end;direction:ltr;overflow-x:auto}
+.col{flex:1;min-width:22px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px}
+.bars{display:flex;gap:2px;align-items:flex-end;height:100px;width:100%}.bars i{flex:1;border-radius:4px 4px 0 0;min-height:2px}
+.col small{font-size:9px;color:var(--mute)}
+.cat{margin-bottom:10px}.cat .tr{height:7px;background:var(--s2);border-radius:9px;overflow:hidden;margin-top:5px}.cat .tr i{display:block;height:100%;background:linear-gradient(90deg,var(--em),#4aa8ff)}
+.badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:99px;background:#2ee6a622;color:var(--em)}.badge.w{background:#f5c04a22;color:var(--gold)}.badge.b{background:#ff6b7a22;color:var(--red)}
+nav{position:fixed;bottom:0;left:0;right:0;background:#0b1322ee;backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px));z-index:5}
+nav button{background:none;color:var(--mute);padding:4px;font-size:11px;border-radius:12px}nav button b{display:block;font-size:20px}nav button.on{color:var(--em)}
+#fab{position:fixed;bottom:calc(74px + env(safe-area-inset-bottom,0px));left:18px;width:58px;height:58px;border-radius:50%;font-size:30px;padding:0;z-index:6;box-shadow:0 8px 28px #2ee6a655}
+#sheet{position:fixed;inset:0;background:#000a;z-index:20;display:none;align-items:flex-end}
+#sheet>div{background:var(--s1);width:100%;max-width:560px;margin:auto;border-radius:24px 24px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));border:1px solid var(--line)}
+.seg{display:flex;background:var(--s2);border-radius:14px;padding:4px;margin-bottom:12px}.seg button{background:none;color:var(--mute);padding:10px}.seg .on{background:var(--em);color:#04281c}
+.auth{text-align:center;padding-top:8vh}.logo{font-size:56px}
+#toast{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translateX(-50%);background:var(--s2);border:1px solid var(--line);padding:10px 16px;border-radius:12px;z-index:30;display:none;font-size:13px}
+.empty{text-align:center;color:var(--mute);padding:22px;font-size:14px}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<button id="fab" onclick="openSheet()" style="display:none">+</button>
+<nav id="nav"></nav>
+<div id="sheet" onclick="if(event.target==this)closeSheet()"><div id="sh"></div></div>
+<div id="toast"></div>
+<script>
+/* ===== إعدادات Supabase: الصق بياناتك هنا (انظر خطوات الإعداد) ===== */
+const CFG={url:'',key:''};
+/* لو سيبتها فاضية التطبيق يشتغل بوضع تجريبي على الجهاز فقط */
+const LOCAL=!CFG.url,OZ=31.1035,RATE=3.75,$=i=>document.getElementById(i);
+const n=(x,d=0)=>Number(x||0).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const sum=(a,f)=>a.reduce((s,x)=>s+f(x),0),today=()=>new Date().toISOString().slice(0,10);
+const ls=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+let E=[],tab='home',flt='all',user=null,sb=null,P=ls('px',null),prem=+ls('prem',0),cur=ls('cur','SAR'),sheet='expense';
+const EXC=['أكل وشرب','مواصلات','فواتير','سكن','صحة','ترفيه','تسوق','أخرى'],INC=['راتب','عمولة','أرباح','أخرى'];
+const ICO={'أكل وشرب':'🍽️','مواصلات':'🚗','فواتير':'💡','سكن':'🏠','صحة':'🩺','ترفيه':'🎬','تسوق':'🛍️','راتب':'💼','عمولة':'🤝','أرباح':'📈','أخرى':'✨'};
+const mon=k=>['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'][+k.slice(5)-1];
+function toast(t){const e=$('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',3000)}
+
+/* ===== البيانات ===== */
+const sortE=()=>E.sort((a,b)=>b.date.localeCompare(a.date));
+const store={
+async load(){if(LOCAL){E=ls('E',[]);return}const{data,error}=await sb.from('entries').select('*').order('date',{ascending:false});if(error)throw error;E=data},
+async add(e){if(LOCAL){e.id=Date.now()+'';E.push(e);localStorage.setItem('E',JSON.stringify(E))}else{const{data,error}=await sb.from('entries').insert(e).select().single();if(error)throw error;E.push(data)}sortE()},
+async del(id){if(!LOCAL){const{error}=await sb.from('entries').delete().eq('id',id);if(error)throw error}E=E.filter(x=>x.id!=id);if(LOCAL)localStorage.setItem('E',JSON.stringify(E))}};
+
+/* ===== سعر الذهب (مصدرين + تحقق) ===== */
+const J=async u=>{const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw 0;return r.json()};
+async function refreshPrice(){
+const r=await Promise.allSettled([J('https://api.gold-api.com/price/XAU').then(j=>+j.price),J('https://data-asg.goldprice.org/dbXRates/USD').then(j=>+j.items[0].xauPrice)]);
+const v=[['gold-api.com',r[0]],['goldprice.org',r[1]]].filter(x=>x[1].status=='fulfilled'&&x[1].value>0).map(x=>({s:x[0],p:x[1].value}));
+if(v.length){const avg=sum(v,x=>x.p)/v.length;P={oz:avg,src:v,dev:v.length>1?Math.abs(v[0].p-v[1].p)/avg*100:null,at:Date.now()};localStorage.setItem('px',JSON.stringify(P))}
+if(LOCAL||user)render()}
+const gram=()=>P?P.oz/OZ*RATE*(1+prem/100):0;
+const fg=x=>cur=='USD'?'$'+n(x/RATE,2):n(x)+' ر.س';
+function verify(){if(!P)return'<span class="badge b">لا يوجد سعر</span>';
+if(P.dev==null)return'<span class="badge w">مصدر واحد فقط ('+P.src[0].s+')</span>';
+return P.dev<0.5?'<span class="badge">✓ مؤكد من مصدرين (فرق '+P.dev.toFixed(2)+'%)</span>':'<span class="badge w">⚠ فرق '+P.dev.toFixed(2)+'% بين المصدرين</span>'}
+
+/* ===== حسابات ===== */
+function stats(){const k=t=>E.filter(x=>x.kind==t),inc=sum(k('income'),x=>+x.amount),exp=sum(k('expense'),x=>+x.amount),gl=k('gold'),g=sum(gl,x=>+x.grams),cost=sum(gl,x=>x.grams*x.price),val=g*gram();
+return{inc,exp,cash:inc-exp,g,cost,val,pl:val-cost,pct:cost&&P?(val-cost)/cost*100:0,avg:g?cost/g:0}}
+const sg=x=>x>=0?'em':'red',pc=x=>(x>=0?'+':'')+x.toFixed(1)+'%';
+
+/* ===== العرض ===== */
+function render(){
+const T=[['home','🏠','الرئيسية'],['list','🧾','الحركات'],['gold','🪙','الذهب'],['me','⚙️','حسابي']];
+$('nav').innerHTML=T.map(t=>`<button class="${tab==t[0]?'on':''}" style="flex:1" onclick="tab='${t[0]}';render();scrollTo(0,0)"><b>${t[1]}</b>${t[2]}</button>`).join('');
+$('fab').style.display='block';$('app').innerHTML={home,list,gold,me}[tab]()}
+
+function home(){const s=stats(),mk=today().slice(0,7),f=(t,m)=>sum(E.filter(x=>x.kind==t&&x.date.startsWith(m)),x=>+x.amount),mi=f('income',mk),me_=f('expense',mk);
+const ks=[...new Set(E.filter(x=>x.kind!='gold').map(x=>x.date.slice(0,7)))].sort().slice(-12),D=ks.map(k=>({k,i:f('income',k),e:f('expense',k)})),mx=Math.max(1,...D.flatMap(d=>[d.i,d.e]));
+const cats={};E.filter(x=>x.kind=='expense'&&x.date.startsWith(mk)).forEach(x=>cats[x.category]=(cats[x.category]||0)+ +x.amount);const cm=Math.max(1,...Object.values(cats));
+return`<h1>أهلًا 👋</h1><div class="mute">${mon(mk)} ${mk.slice(0,4)}</div><h2></h2>
+<div class="card hero"><div class="k" style="color:#bfeede">إجمالي الثروة</div><div class="big">${n(s.cash+s.val)} ر.س</div><div class="k" style="color:#bfeede;margin-top:6px">سيولة ${n(s.cash)} · ذهب ${n(s.val)}</div></div>
+<div class="grid"><div class="card"><div class="k">دخل الشهر</div><div class="mid em">${n(mi)}</div></div><div class="card"><div class="k">مصروف الشهر</div><div class="mid red">${n(me_)}</div></div>
+<div class="card"><div class="k">نسبة الادخار</div><div class="mid">${mi?Math.round((mi-me_)/mi*100):0}%</div></div><div class="card" onclick="tab='gold';render()"><div class="k">أداء الذهب</div><div class="mid ${sg(s.pl)}">${s.cost?pc(s.pct):'—'}</div></div></div>
+<h2>الدخل مقابل المصروف</h2><div class="card">${D.length?`<div class="chart">${D.map(d=>`<div class="col"><div class="bars"><i style="height:${d.i/mx*100}%;background:var(--em)"></i><i style="height:${d.e/mx*100}%;background:var(--red)"></i></div><small>${d.k.slice(2)}</small></div>`).join('')}</div>`:'<div class="empty">سجّل أول حركة بزر +</div>'}</div>
+${Object.keys(cats).length?`<h2>مصروفات الشهر حسب البند</h2><div class="card">${Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([c,v])=>`<div class="cat"><div class="row" style="justify-content:space-between"><span>${ICO[c]||'✨'} ${esc(c)}</span><b>${n(v)}</b></div><div class="tr"><i style="width:${v/cm*100}%"></i></div></div>`).join('')}</div>`:''}`}
+
+function list(){const L=E.filter(x=>x.kind!='gold'&&(flt=='all'||x.kind==flt)).slice(0,100);
+return`<h1>الحركات</h1><h2></h2><div class="chips">${[['all','الكل'],['income','دخل'],['expense','مصروف']].map(c=>`<button class="${flt==c[0]?'on':''}" onclick="flt='${c[0]}';render()">${c[1]}</button>`).join('')}</div>
+<div class="card">${L.length?L.map(x=>`<div class="li"><div class="ic">${ICO[x.category]||'✨'}</div><div class="t"><b>${esc(x.category||'')}${x.note?' · '+esc(x.note):''}</b><span class="k">${x.date}</span></div><b class="${x.kind=='income'?'em':'red'}">${x.kind=='income'?'+':'−'}${n(x.amount)}</b><button class="x" onclick="del('${x.id}')">×</button></div>`).join(''):'<div class="empty">لا توجد حركات</div>'}</div>`}
+
+function gold(){const s=stats(),gl=E.filter(x=>x.kind=='gold'),u=cur=='USD';
+return`<h1>الذهب</h1><h2></h2><div class="card goldc"><div class="k">جرام عيار 24</div><div class="big gd">${P?n(gram(),2)+' ر.س':'—'}</div>
+${P?`<div style="font-weight:600;margin-top:2px">$${n(gram()/RATE,2)} للجرام</div><div class="k" style="margin-top:10px">الأونصة: ${n(gram()*OZ,2)} ر.س · $${n(gram()*OZ/RATE,2)}</div>`:''}
+<div style="margin-top:12px">${verify()}</div>
+<div class="k" style="margin-top:8px;line-height:1.8">${P?P.src.map(x=>x.s+': $'+n(x.p,2)).join(' · ')+'<br>آخر تحديث '+new Date(P.at).toLocaleTimeString('ar-EG')+' · سعر عالمي فوري (Spot)، وقد يختلف قليلًا عن سعر المحلات — قارنه بـ kitco.com':'اضغط تحديث'}</div>
+<button class="alt" onclick="refreshPrice()">🔄 تحديث السعر</button></div>
+<div class="grid"><div class="card"><div class="k">إجمالي الجرامات</div><div class="mid">${n(s.g,2)}</div></div><div class="card"><div class="k">متوسط الشراء</div><div class="mid">${fg(s.avg)}</div></div>
+<div class="card"><div class="k">دفعت</div><div class="mid">${fg(s.cost)}</div></div><div class="card"><div class="k">قيمتها الآن</div><div class="mid gd">${fg(s.val)}</div></div></div>
+<div class="card" style="margin-top:12px"><div class="k">الربح / الخسارة</div><div class="big ${sg(s.pl)}">${s.pl>=0?'+':''}${fg(s.pl)}</div><div class="${sg(s.pl)}" style="font-weight:700">${s.cost?pc(s.pct):''}</div>
+<button class="alt" onclick="setCur()">${u?'عرض بالريال':'عرض بالدولار $'}</button></div>
+<h2>مشترياتي</h2><div class="card">${gl.length?gl.map(x=>{const c=x.grams*x.price,p=P?x.grams*gram()-c:0;return`<div class="li"><div class="ic">🪙</div><div class="t"><b>${n(x.grams,2)} جم × ${fg(x.price)}</b><span class="k">${x.date} · دفعت ${fg(c)}</span></div><div style="text-align:left"><b class="${sg(p)}">${P?pc(p/c*100):''}</b><div class="k">${P?(p>=0?'+':'')+fg(p):''}</div></div><button class="x" onclick="del('${x.id}')">×</button></div>`}).join(''):'<div class="empty">سجّل أول عملية شراء بزر +</div>'}</div>`}
+
+function me(){return`<h1>حسابي</h1><h2></h2><div class="card"><div class="k">الحساب</div><div style="margin:4px 0 12px">${LOCAL?'وضع تجريبي (البيانات على هذا الجهاز فقط)':esc(user?.email)}</div>${LOCAL?'<div class="k" style="line-height:1.8">لتفعيل الحسابات وحفظ البيانات سحابيًا اتبع خطوات الإعداد في الدليل.</div>':'<button class="alt" onclick="logout()">تسجيل الخروج</button>'}</div>
+<div class="card"><div class="k">علاوة السوق المحلي على السعر العالمي (%)</div><input id="pr" type="number" inputmode="decimal" value="${prem}" step="0.1"><button class="alt" onclick="prem=+$('pr').value||0;localStorage.setItem('prem',prem);render();toast('تم الحفظ')">حفظ</button><div class="k" style="margin-top:8px;line-height:1.7">اختياري: لو سعر البيع عند محلك أعلى أو أقل من السعر العالمي، ضع الفرق التقريبي لتقترب القيمة من الواقع.</div></div>`}
+
+/* ===== نافذة الإضافة ===== */
+function openSheet(k){sheet=k||sheet;const g=sheet=='gold';
+$('sh').innerHTML=`<div class="seg">${[['expense','مصروف'],['income','دخل'],['gold','ذهب']].map(c=>`<button class="${sheet==c[0]?'on':''}" onclick="openSheet('${c[0]}')">${c[1]}</button>`).join('')}</div>
+<input type="date" id="sd" value="${today()}">
+${g?`<div class="row"><input id="sg" type="number" inputmode="decimal" placeholder="عدد الجرامات"><input id="sp" type="number" inputmode="decimal" placeholder="سعر الجرام (ر.س)" ${P?`value=""`:''}></div>${P?`<button class="alt" style="margin:-2px 0 10px" onclick="$('sp').value=gram().toFixed(2)">استخدم سعر اليوم ${n(gram(),2)}</button>`:''}`:`<input id="sa" type="number" inputmode="decimal" placeholder="المبلغ بالريال"><select id="sc">${(sheet=='income'?INC:EXC).map(c=>`<option>${c}</option>`).join('')}</select>`}
+<input id="sn" placeholder="ملاحظة (اختياري)"><button onclick="saveE()">حفظ</button>`;$('sheet').style.display='flex'}
+function setCur(){cur=cur=='USD'?'SAR':'USD';localStorage.setItem('cur',JSON.stringify(cur));render()}
+function closeSheet(){$('sheet').style.display='none'}
+async function saveE(){const d=$('sd').value,e={kind:sheet,date:d,note:$('sn').value||null};if(!d)return;
+if(sheet=='gold'){e.grams=+$('sg').value;e.price=+$('sp').value;if(!e.grams||!e.price)return;e.amount=e.grams*e.price}else{e.amount=+$('sa').value;if(!e.amount)return;e.category=$('sc').value}
+try{await store.add(e);closeSheet();render();toast('تم الحفظ ✓')}catch(x){toast('تعذر الحفظ: '+(x.message||x))}}
+async function del(id){if(!confirm('حذف هذا السجل؟'))return;try{await store.del(id);render()}catch(x){toast('تعذر الحذف')}}
+
+/* ===== الدخول ===== */
+function authView(){$('nav').innerHTML='';$('fab').style.display='none';$('app').innerHTML=`<div class="auth"><div class="logo">💰</div><h1>فلوسي</h1><p class="mute">دخلك ومصروفك واستثمارك في الذهب في مكان واحد</p><div class="card" style="text-align:right"><input id="em" type="email" placeholder="البريد الإلكتروني" autocomplete="email"><input id="pw" type="password" placeholder="كلمة السر (6 أحرف على الأقل)" autocomplete="current-password"><button onclick="auth('in')">دخول</button><button class="alt" onclick="auth('up')">إنشاء حساب جديد</button><div id="am" class="k" style="margin-top:10px"></div></div></div>`}
+async function auth(m){const email=$('em').value.trim(),password=$('pw').value;$('am').textContent='...';
+const r=m=='up'?await sb.auth.signUp({email,password}):await sb.auth.signInWithPassword({email,password});
+if(r.error){$('am').textContent=r.error.message;return}
+if(!r.data.session){$('am').textContent='أُرسل إليك إيميل تأكيد. أكّده ثم سجّل الدخول.';return}
+user=r.data.session.user;boot()}
+async function logout(){await sb.auth.signOut();user=null;E=[];authView()}
+async function boot(){try{await store.load()}catch(x){toast('تعذر تحميل البيانات')}render();refreshPrice()}
+(async()=>{
+try{if(!LOCAL){sb=supabase.createClient(CFG.url,CFG.key);user=(await sb.auth.getSession()).data.session?.user||null}}catch(e){toast('تعذر الاتصال بالخادم')}
+if(LOCAL||user)boot();else authView();
+setInterval(()=>{if(LOCAL||user)refreshPrice()},300000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&(LOCAL||user))refreshPrice()});
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})})();
+</script>
+</body>
+</html>

@@ -123,7 +123,7 @@ async function checkAlerts(){if(!user||!P)return;for(const a of A.filter(x=>x.ac
 
 /* ===== stats ===== */
 function stats(){const k=x=>E.filter(e=>e.kind==x),inc=sum(k('income'),x=>+x.amount),exp=sum(k('expense'),x=>+x.amount),gl=k('gold'),g=sum(gl,x=>+x.grams),cost=sum(gl,x=>x.grams*x.price),val=g*gram();
-return{inc,exp,cash:inc-exp-cost,g,cost,val,pl:val-cost,pct:cost&&P?(val-cost)/cost*100:0,avg:g?cost/g:0}}
+return{inc,exp,cash:inc-exp,g,cost,val,pl:val-cost,pct:cost&&P?(val-cost)/cost*100:0,avg:g?cost/g:0}}
 const sg=x=>x>=0?'em':'red',pc=x=>(x>=0?'+':'')+x.toFixed(1)+'%',cu=(x,d=0,p='')=>`<span data-cu="${x}" data-d="${d}" data-p="${p}">${p}${n(x,d)}</span>`;
 function anim(){document.querySelectorAll('[data-cu]').forEach(el=>{const to=+el.dataset.cu,d=+el.dataset.d,p=el.dataset.p,s=performance.now();(function f(now){const k=Math.min(1,(now-s)/900),e=1-Math.pow(1-k,3);el.textContent=p+n(to*e,d);if(k<1)requestAnimationFrame(f)})(s)})}
 
